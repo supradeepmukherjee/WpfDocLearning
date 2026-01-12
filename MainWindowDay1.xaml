@@ -1,0 +1,53 @@
+﻿<Window x:Class="WpfDocLearning.MainWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDocLearning"
+        mc:Ignorable="d"
+        xmlns:vm="clr-namespace:WpfDocLearning.ViewModels"
+        Title="WPF Day1 - Basics" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top toolbar using StackPanel -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,8">
+            <TextBox Width="250" Margin="0,0,8,0" Text="{Binding NewItemName, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Add Item" Command="{Binding AddItemCommand}" />
+            <Button Content="Remove Selected" Command="{Binding RemoveSelectedCommand}" Margin="8,0,0,0"/>
+        </StackPanel>
+
+        <!-- Main content: Grid with two columns -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left: ListBox of items -->
+            <GroupBox Header="Items" Margin="0,0,8,0">
+                <ListBox ItemsSource="{Binding Items}" 
+                         SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                         DisplayMemberPath="Name"/>
+            </GroupBox>
+
+            <!-- Right: Details -->
+            <Border Grid.Column="1" Padding="8" BorderBrush="LightGray" BorderThickness="1" CornerRadius="6">
+                <StackPanel>
+                    <TextBlock Text="Selected Item Details" FontWeight="Bold" Margin="0,0,0,8"/>
+                    <TextBlock Text="Name:" />
+                    <TextBox Text="{Binding SelectedItem.Name, Mode=TwoWay, FallbackValue='(none)'}" />
+                    <CheckBox Content="Is Active" IsChecked="{Binding SelectedItem.IsActive, Mode=TwoWay}" Margin="0,8,0,0"/>
+                    <TextBlock Text="{Binding StatusMessage}" Margin="0,12,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
