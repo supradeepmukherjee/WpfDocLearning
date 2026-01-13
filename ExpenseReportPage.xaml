@@ -58,7 +58,7 @@
 
             <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
 
-                <DataGrid AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource columnHeaderStyle}">
+                <DataGrid AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" ItemsSource="{Binding XPath=Expense}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="ExpenseType" CellTemplate="{StaticResource typeItemTemplate}" />
                         <DataGridTemplateColumn Header="Amount" CellTemplate="{StaticResource amountItemTemplate}" />
