@@ -25,7 +25,7 @@
                         <Person Name="C" Department="Engineering">
                             <Expense ExpenseType="Magazine subscription" 
          ExpenseAmount="50"/>
-                            <Expense ExpenseType="New machine" ExpenseAmount="600" />
+                            <Expense ExpenseType="New machine" ExpenseAmount="6000" />
                             <Expense ExpenseType="Software" ExpenseAmount="500" />
                         </Person>
                         <Person Name="D" Department="Finance">

@@ -14,7 +14,23 @@
                 <Label Content="{Binding XPath=@ExpenseType}"/>
             </DataTemplate>
             <DataTemplate x:Key="amountItemTemplate">
-                <Label Content="{Binding XPath=@ExpenseAmount}"/>
+                <Label Content="{Binding XPath=@ExpenseAmount}">
+                    <Label.Style>
+                        <Style TargetType="Label">
+
+                            <Setter Property="Foreground"
+                        Value="{Binding XPath=@ExpenseAmount,
+                        Converter={StaticResource ExpenseAmountBrushConverter}}"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding XPath=@ExpenseAmount}" Value="6000">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Label.Style>
+                </Label>
             </DataTemplate>
         </Grid.Resources>
         <Grid.Background>

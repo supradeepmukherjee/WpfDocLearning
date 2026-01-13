@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:WpfDocLearning"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <local:ExpenseAmountToBrushConverter x:Key="ExpenseAmountBrushConverter"/>
         <Style x:Key="headerTextStyle" TargetType="{x:Type Label}">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>  
