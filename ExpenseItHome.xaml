@@ -35,7 +35,14 @@
                 </x:XData>
             </XmlDataProvider> 
             <DataTemplate x:Key="nameItemTemplate">
-                <Label Content="{Binding XPath=@Name}"/>
+                <StackPanel>
+                    <TextBlock Text="{Binding XPath=@Name}" FontWeight="Bold"/>
+
+                    <TextBlock FontSize="10"
+                   Foreground="Gray"
+                   Text="{Binding Title,
+                                  RelativeSource={RelativeSource AncestorType=Page}}"/>
+                </StackPanel>
             </DataTemplate>
         </Grid.Resources>
         <Grid.ColumnDefinitions>

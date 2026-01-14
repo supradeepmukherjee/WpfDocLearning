@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace WpfDocLearning
 {
@@ -26,7 +27,17 @@ namespace WpfDocLearning
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ExpenseReportPage expenseReportPage = new ExpenseReportPage(peopleListBox.SelectedItem);
+            XmlElement selectedPerson =
+                peopleListBox.SelectedItem as XmlElement;
+
+            if (selectedPerson == null)
+            {
+                MessageBox.Show("Please select a person first.");
+                return;
+            }
+
+            ExpenseReportPage expenseReportPage =
+                new ExpenseReportPage(selectedPerson);
             NavigationService.Navigate(expenseReportPage);
         }
     }

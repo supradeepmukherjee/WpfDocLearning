@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace WpfDocLearning
 {
@@ -27,6 +28,11 @@ namespace WpfDocLearning
         public ExpenseReportPage(object data) : this()
         {
             this.DataContext = data;
+        }
+        public ExpenseReportPage(XmlElement selectedPerson)
+        {
+            InitializeComponent();
+            DataContext = selectedPerson;
         }
     }
 }
