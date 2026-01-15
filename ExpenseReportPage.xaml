@@ -14,7 +14,7 @@
                 <Label Content="{Binding XPath=@ExpenseType}"/>
             </DataTemplate>
             <DataTemplate x:Key="amountItemTemplate">
-                <Label Content="{Binding XPath=@ExpenseAmount}">
+                <Label>
                     <Label.Style>
                         <Style TargetType="Label">
 
@@ -30,6 +30,15 @@
 
                         </Style>
                     </Label.Style>
+                    <Label.Content>
+                        <PriorityBinding>
+                            <!-- Primary binding -->
+                            <Binding XPath="@ExpenseAmount"/>
+
+                            <!-- Fallback if amount is missing -->
+                            <Binding Source="N/A"/>
+                        </PriorityBinding>
+                    </Label.Content>
                 </Label>
             </DataTemplate>
         </Grid.Resources>
@@ -74,11 +83,28 @@
 
             <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left">
 
-                <DataGrid AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" ItemsSource="{Binding XPath=Expense}">
+                <DataGrid AutoGenerateColumns="False" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" ItemsSource="{Binding XPath=Expense}" RowDetailsVisibilityMode="VisibleWhenSelected">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="ExpenseType" CellTemplate="{StaticResource typeItemTemplate}" />
                         <DataGridTemplateColumn Header="Amount" CellTemplate="{StaticResource amountItemTemplate}" />
                     </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Border Padding="8" Background="#FFF5F5F5">
+                                <StackPanel>
+                                    <TextBlock Text="Expense Details" FontWeight="Bold"/>
+
+                                    <TextBlock
+                    Text="{Binding XPath=@ExpenseType,
+                                   StringFormat=Type: {0}}"/>
+
+                                    <TextBlock
+                    Text="{Binding XPath=@ExpenseAmount,
+                                   StringFormat=Amount: {0}}"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
                 </DataGrid>
             </Grid>
         </Grid>
